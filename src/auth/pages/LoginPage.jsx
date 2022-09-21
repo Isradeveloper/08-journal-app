@@ -14,10 +14,12 @@ export const LoginPage = () => {
 
   const dispatch = useDispatch()
 
-  const { email, password, onInputChange } = useForm({
+  const { email, password, onInputChange, formState } = useForm({
     email: 'ingisraeltrujillo@google.com',
     password: '123456'
   })
+
+  console.log(formState)
 
   const onSubmit = (e) => {
     e.preventDefault()
