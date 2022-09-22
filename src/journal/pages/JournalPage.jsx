@@ -12,6 +12,7 @@ export const JournalPage = () => {
         {/* <NoteView /> */}
 
         <IconButton
+          className='animate__animated animate__fadeInDown animate__slow'
           size='large'
           sx={{
             color: 'white',

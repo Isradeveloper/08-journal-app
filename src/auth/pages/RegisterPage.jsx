@@ -36,7 +36,7 @@ export const RegisterPage = () => {
     setFormSubmitted(true)
 
     if (!isFormValid) return
-    console.log(formState)
+    // console.log(formState)
     dispatch(startCreatingUserWithEmailPassword(formState))
   }
 

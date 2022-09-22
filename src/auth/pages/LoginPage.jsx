@@ -25,27 +25,27 @@ export const LoginPage = () => {
     email: [(value) => value.includes('@'), 'El correo debe de tener una @'],
     password: [(value) => value.length >= 6, 'El password debe de tener más de 6 letras']
   }
-  const { email, password, onInputChange, formState, isFormValid, emailValid, passwordValid } = useForm(FormData, formValidations)
+  const { email, password, onInputChange, isFormValid, emailValid, passwordValid } = useForm(FormData, formValidations)
 
-  console.log(formState)
+  // console.log(formState)
 
   const onSubmit = (e) => {
     e.preventDefault()
     setFormSubmitted(true)
-    console.log({ email, password })
+    // console.log({ email, password })
     // dispatch(checkingAuthentication())
     if (!isFormValid) return
     dispatch(startLoginWithEmailPassword({ email, password }))
   }
 
   const onGoogleSignIn = () => {
-    console.log('google')
+    // console.log('google')
     dispatch(startGoogleSignIn())
   }
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__fast'>
         <Grid container>
 
           <Grid item xs={12} md={6} sx={{ mt: 1 }}>
