@@ -1,13 +1,16 @@
-import { Button, Grid, Link, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+/* eslint-disable no-extra-boolean-cast */
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
+import { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks'
+import { startCreatingUserWithEmailPassword } from '../../store/auth/thunks'
 import { AuthLayout } from '../layout/AuthLayout'
 
 const formData = {
-  email: 'ingisraeltrujillo@google.com',
-  password: '123456',
-  displayName: 'Isra Trujillo'
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -19,13 +22,22 @@ const formValidations = {
 export const RegisterPage = () => {
   const { email, password, displayName, onInputChange, formState, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
+  const dispatch = useDispatch()
+  const { status, errorMessage } = useSelector((state) => state.auth)
+  const isCheckingAuthentication = useMemo(() => {
+    return status === 'checking'
+  }, [status])
+
   const [formSubmitted, setFormSubmitted] = useState(false)
   // console.log(passwordValid)
 
   const onSubmit = (e) => {
     e.preventDefault()
     setFormSubmitted(true)
+
+    if (!isFormValid) return
     console.log(formState)
+    dispatch(startCreatingUserWithEmailPassword(formState))
   }
 
   return (
@@ -76,8 +88,15 @@ export const RegisterPage = () => {
 
           <Grid container spacing={2} sx={{ mt: 1 }}>
 
+            <Grid item xs={12} display={!!errorMessage ? '' : 'none'}>
+              <Alert severity='error'>{errorMessage}</Alert>
+            </Grid>
+
+          </Grid>
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+
             <Grid item xs={12} sm={6}>
-              <Button type='submit' variant='contained' fullWidth>Register</Button>
+              <Button disabled={isCheckingAuthentication} type='submit' variant='contained' fullWidth>Register</Button>
             </Grid>
 
           </Grid>
