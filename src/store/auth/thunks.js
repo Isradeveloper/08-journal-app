@@ -1,5 +1,4 @@
 /* eslint-disable padded-blocks */
-import { async } from '@firebase/util'
 import { LoginWithEmailPassword, registerUserWithEmailPassword, signInWithGoogle } from '../../firebase/providers'
 import { checkingCredentials, login, logout } from './authSlice'
 
@@ -17,7 +16,7 @@ export const startGoogleSignIn = () => {
     const result = await signInWithGoogle()
     console.log({ result })
 
-    if (!result.ok) return dispatch(logout(result.errorMessage))
+    if (!result.ok) return dispatch(logout(result))
     dispatch(login(result))
   }
 }
