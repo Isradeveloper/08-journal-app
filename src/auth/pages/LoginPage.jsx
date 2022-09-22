@@ -48,7 +48,7 @@ export const LoginPage = () => {
       <form onSubmit={onSubmit} className='animate__animated animate__fadeIn animate__fast'>
         <Grid container>
 
-          <Grid item xs={12} md={6} sx={{ mt: 1 }}>
+          <Grid item xs={12} sx={{ mt: 1 }}>
             <TextField
               label='Correo'
               type='email'
@@ -62,7 +62,7 @@ export const LoginPage = () => {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} sx={{ mt: 1 }}>
+          <Grid item xs={12} sx={{ mt: 1 }}>
             <TextField
               label='Contraseña'
               type='password'
