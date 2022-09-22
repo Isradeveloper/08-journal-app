@@ -9,8 +9,16 @@ const formData = {
   displayName: 'Isra Trujillo'
 }
 
+const formValidations = {
+  email: [(value) => value.includes('@'), 'El correo debe de tener una @'],
+  password: [(value) => value.length >= 6, 'El password debe de tener más de 6 letras'],
+  displayName: [(value) => value.length >= 1, 'El nombre es obligario']
+}
+
 export const RegisterPage = () => {
-  const { email, password, displayName, onInputChange, formState, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData)
+  const { email, password, displayName, onInputChange, formState, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
+
+  console.log(passwordValid)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -18,12 +26,23 @@ export const RegisterPage = () => {
   }
 
   return (
-    <AuthLayout title='Register'>
+    <AuthLayout title='Crear cuenta'>
+      <h1>FormValid {isFormValid ? 'Valido' : 'Incorrecto'}</h1>
       <form onSubmit={onSubmit}>
         <Grid container>
 
           <Grid item xs={12} md={6} sx={{ mt: 1 }}>
-            <TextField name='displayName' value={displayName} onChange={onInputChange} label='Nombre completo' type='text' placeholder='Tu nombre' fullWidth />
+            <TextField
+              name='displayName'
+              value={displayName}
+              onChange={onInputChange}
+              label='Nombre completo'
+              type='text'
+              placeholder='Tu nombre'
+              fullWidth
+              error={!displayNameValid}
+              helperText={displayNameValid}
+            />
           </Grid>
 
           <Grid item xs={12} md={6} sx={{ mt: 1 }}>
