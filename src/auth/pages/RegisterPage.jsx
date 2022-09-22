@@ -1,4 +1,5 @@
 import { Button, Grid, Link, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useForm } from '../../hooks'
 import { AuthLayout } from '../layout/AuthLayout'
@@ -18,10 +19,12 @@ const formValidations = {
 export const RegisterPage = () => {
   const { email, password, displayName, onInputChange, formState, isFormValid, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
-  console.log(passwordValid)
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  // console.log(passwordValid)
 
   const onSubmit = (e) => {
     e.preventDefault()
+    setFormSubmitted(true)
     console.log(formState)
   }
 
@@ -40,17 +43,35 @@ export const RegisterPage = () => {
               type='text'
               placeholder='Tu nombre'
               fullWidth
-              error={!displayNameValid}
+              error={!!displayNameValid && formSubmitted}
               helperText={displayNameValid}
             />
           </Grid>
 
           <Grid item xs={12} md={6} sx={{ mt: 1 }}>
-            <TextField name='email' value={email} onChange={onInputChange} label='Correo' type='email' placeholder='correo@google.com' fullWidth />
+            <TextField
+              name='email'
+              value={email}
+              onChange={onInputChange}
+              label='Correo'
+              type='email' placeholder='correo@google.com'
+              fullWidth
+              error={!!emailValid && formSubmitted}
+              helperText={emailValid}
+            />
           </Grid>
 
           <Grid item xs={12} md={6} sx={{ mt: 1 }}>
-            <TextField name='password' value={password} onChange={onInputChange} label='Contraseña' type='password' placeholder='Contraseña' fullWidth />
+            <TextField
+              name='password'
+              value={password}
+              onChange={onInputChange}
+              label='Contraseña'
+              type='password' placeholder='Contraseña'
+              fullWidth
+              error={!!passwordValid && formSubmitted}
+              helperText={passwordValid}
+            />
           </Grid>
 
           <Grid container spacing={2} sx={{ mt: 1 }}>
