@@ -42,7 +42,7 @@ export const journalSlice = createSlice({
       state.isSaving = false
       state.notes = state.notes.map((note) => {
 
-        if (note.id === action.payload.id) {
+        if (note.id === action.payload.id) { // Se agrega la nota activa al arreglo de notes
           return action.payload
         }
 
@@ -53,9 +53,13 @@ export const journalSlice = createSlice({
     },
     deleteNoteById: (state, action) => {
 
+    },
+    setPhotosToActiveNote: (state, action) => {
+      state.active.imageUrls = [...state.active.imageUrls, ...action.payload]
+      state.isSaving = false
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById } = journalSlice.actions
+export const { savingNewNote, addNewEmptyNote, setActiveNote, setNotes, setSaving, updateNote, deleteNoteById, setPhotosToActiveNote } = journalSlice.actions
