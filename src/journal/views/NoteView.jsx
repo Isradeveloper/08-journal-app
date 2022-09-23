@@ -1,10 +1,10 @@
-import { CloudUpload, SaveOutlined, UploadFileRounded } from '@mui/icons-material'
+import { CloudUpload, DeleteOutline, SaveOutlined, UploadFileRounded } from '@mui/icons-material'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { useEffect, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm'
 import { setActiveNote } from '../../store/journal/journalSlice'
-import { startSaveNote, startUploadingFiles } from '../../store/journal/thunks'
+import { startDeletingNote, startSaveNote, startUploadingFiles } from '../../store/journal/thunks'
 import { ImageGallery } from '../components'
 import Swal from 'sweetalert2'
 
@@ -35,6 +35,10 @@ export const NoteView = () => {
 
   const onSaveNote = () => {
     dispatch(startSaveNote())
+  }
+
+  const onDelete = () => {
+    dispatch(startDeletingNote())
   }
 
   // const myWidget = window.cloudinary.createUploadWidget({
@@ -110,6 +114,13 @@ export const NoteView = () => {
           value={body}
           onChange={onInputChange}
         />
+      </Grid>
+
+      <Grid container justifyContent='end'>
+        <Button sx={{ mt: 2, padding: 2 }} onClick={(e) => { onDelete() }}>
+          <DeleteOutline color='error' sx={{ fontSize: 40 }} />
+          BORRAR NOTA
+        </Button>
       </Grid>
       {/* Image Gallery */}
       <ImageGallery images={note.imageUrls} />
