@@ -46,7 +46,7 @@ export const RegisterPage = () => {
       <form onSubmit={onSubmit}>
         <Grid container>
 
-          <Grid item xs={12} md={6} sx={{ mt: 1 }}>
+          <Grid item xs={12} sx={{ mt: 1 }}>
             <TextField
               name='displayName'
               value={displayName}
@@ -60,7 +60,7 @@ export const RegisterPage = () => {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} sx={{ mt: 1 }}>
+          <Grid item xs={12} sx={{ mt: 1 }}>
             <TextField
               name='email'
               value={email}
@@ -73,7 +73,7 @@ export const RegisterPage = () => {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} sx={{ mt: 1 }}>
+          <Grid item xs={12} sx={{ mt: 1 }}>
             <TextField
               name='password'
               value={password}
