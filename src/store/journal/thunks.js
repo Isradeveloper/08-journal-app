@@ -17,7 +17,9 @@ export const startNewNote = () => {
     const newNote = {
       title: '',
       body: '',
-      date: new Date().getTime()
+      date: new Date().getTime(),
+      imageUrls: []
+
     }
 
     // Crea la nueva nota en firebase
